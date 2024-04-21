@@ -14,12 +14,10 @@ class Auth:
         """require auth public method handling"""
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
             return True
+        if path[-1] != "/":
+            path += "/"
 
-        if path[-1] != '/':
-            path += '/'
-
-        if path in excluded_paths:
-            return False
+        return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
         """Authorization header"""
