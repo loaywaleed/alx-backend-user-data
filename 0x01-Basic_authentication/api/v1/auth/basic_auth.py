@@ -73,16 +73,17 @@ class BasicAuth(Auth):
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
+        """Loading current_user if valid"""
         header = self.authorization_header(request)
 
         if header is None:
             return None
-        base64_header = self.extract_base64_authorization_header
+        base64_header = self.extract_base64_authorization_header(header)
 
         if base64_header is None:
             return None
 
-        decoded = self.decode_base64_authorization_header(base64_header):
+        decoded = self.decode_base64_authorization_header(base64_header)
 
         if decoded is None:
             return None
