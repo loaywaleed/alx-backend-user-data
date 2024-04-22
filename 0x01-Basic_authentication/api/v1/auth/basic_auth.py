@@ -13,7 +13,8 @@ class BasicAuth(Auth):
                                             authorization_header: str) -> str:
         """Header extraction method"""
 
-        if authorization_header is None or authorization_header != type(str):
+        if authorization_header is None or not isinstance(
+                authorization_header, str):
             return None
         if not authorization_header.startswith("Basic "):
             return None
