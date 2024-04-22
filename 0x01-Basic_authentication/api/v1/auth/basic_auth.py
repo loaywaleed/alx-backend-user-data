@@ -5,7 +5,6 @@ Basic Authorization module
 
 from api.v1.auth.auth import Auth
 from base64 import b64decode
-from typing import str
 
 
 class BasicAuth(Auth):
@@ -38,7 +37,9 @@ class BasicAuth(Auth):
             return None
         return decoded_value
 
-    def extract_user_credentials(self, decoded_base64_authorization_header: str) -> (str, str):
+    def extract_user_credentials(self,
+                                 decoded_base64_authorization_header: str
+                                 ) -> (str, str):
         """Extracting user credentials from header"""
         if decoded_base64_authorization_header is None:
             return None, None
@@ -47,6 +48,6 @@ class BasicAuth(Auth):
         if ':' not in decoded_base64_authorization_header:
             return None, None
 
-        username = decoded_base64_authorization_header.split(":")[0]
-        password = decoded_base64_authorization_header.split(":")[1]
+        username = decoded_base64_authorization_header.split(":", 1)[0]
+        password = decoded_base64_authorization_header.split(":", 1)[1]
         return username, password
