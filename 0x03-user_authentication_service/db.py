@@ -39,12 +39,14 @@ class DB:
         self._session.add(user)
         self._session.commit()
         return user
-    
+
     def find_user_by(self, **kwargs) -> User:
         """Filteration method
         """
-        accepted_keys = ['email', 'id', 'hashed_password', 'session_id',
-                          'reset_token']
+        accepted_keys = [
+            'email', 'id', 'hashed_password',
+            'session_id', 'reset_token'
+            ]
         for key in kwargs.keys():
             if key not in accepted_keys:
                 raise InvalidRequestError
