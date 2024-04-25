@@ -8,10 +8,10 @@ from db import DB, User
 from sqlalchemy.orm.exc import NoResultFound
 
 
-
 def _hash_password(password: str) -> bytes:
     """Hashing password and returning it"""
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
 
 class Auth:
     """Auth representation"""
