@@ -50,7 +50,7 @@ class DB:
         for key in kwargs.keys():
             if key not in accepted_keys:
                 raise InvalidRequestError
-        value = self._session.query().filter_by(**kwargs).first()
+        value = self._session.query(User).filter_by(**kwargs).first()
         if value is None:
             raise NoResultFound
         return value
