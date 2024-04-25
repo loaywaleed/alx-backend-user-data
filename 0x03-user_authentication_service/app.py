@@ -18,6 +18,7 @@ def welcome() -> Response:
         {"message": "Bienvenue"}
         )
 
+
 @app.route("/users", methods=["POST"])
 def users():
     """Route for registering users"""
@@ -32,6 +33,7 @@ def users():
         return jsonify(
             {"message": "email already registered"}
             ), 400
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
