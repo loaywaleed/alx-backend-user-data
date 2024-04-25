@@ -6,11 +6,17 @@ Authorization module
 import bcrypt
 from db import DB, User
 from sqlalchemy.orm.exc import NoResultFound
+from uuid import uuid4
 
 
 def _hash_password(password: str) -> bytes:
     """Hashing password and returning it"""
     return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+
+
+def _generate_uuid() -> str:
+    """generating uuid"""
+    return str(uuid4())
 
 
 class Auth:
@@ -27,15 +33,14 @@ class Auth:
             raise ValueError(f"User {email} already exists")
         except NoResultFound:
             return self._db.add_user(email, _hash_password(password))
-        
+
     def valid_login(self, email: str, password: str) -> bool:
         """Validating login"""
         try:
             user = self._db.find_user_by(email=email)
         except NoResultFound:
             return False
-        if password == bcrypt.checkpw(password.encode(), user.hashed_password):
+        if bcrypt.checkpw(password.encode(), user.hashed_password):
             return True
         else:
             return False
-
