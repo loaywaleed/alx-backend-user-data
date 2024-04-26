@@ -34,6 +34,7 @@ def users():
             {"message": "email already registered"}
             ), 400
 
+
 @app.route("/sessions", methods=["POST"], strict_slashes=False)
 def login() -> Response:
     """Login route, validates login credentials"""
@@ -47,6 +48,7 @@ def login() -> Response:
         return response
     else:
         abort(401)
+
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000")
