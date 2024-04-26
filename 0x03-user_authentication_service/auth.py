@@ -45,7 +45,7 @@ class Auth:
         else:
             return False
         
-    def create_session(self, email: str):
+    def create_session(self, email: str) -> str:
         """Creating a session"""
         try:
             user = self.db.find_user_by(email=email)
